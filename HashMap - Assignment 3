@@ -1,0 +1,42 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+class Tester {
+
+    public static Map<Character, Integer> findOccurrences(String input) {
+        Map<Character, Integer> occurrenceMap = new HashMap<>();
+        
+        for (char c : input.toCharArray()) {
+            occurrenceMap.put(c, occurrenceMap.getOrDefault(c, 0) + 1);
+        }
+        
+        return occurrenceMap;
+    }
+    
+    public static void main(String args[]) {
+        String input1 = "occurrence";
+        Map<Character, Integer> occurrenceMap1 = findOccurrences(input1);
+        
+        System.out.println("Occurrences of characters for 'occurrence'\n=======================");
+        for (Entry<Character, Integer> entry : occurrenceMap1.entrySet()) {
+            if (entry.getKey() == ' ') {
+                System.out.println("' ' -- " + entry.getValue());
+            } else {
+                System.out.println(entry.getKey() + " -- " + entry.getValue());
+            }
+        }
+
+        String input2 = "data structures";
+        Map<Character, Integer> occurrenceMap2 = findOccurrences(input2);
+        
+        System.out.println("\nOccurrences of characters for 'data structures'\n=======================");
+        for (Entry<Character, Integer> entry : occurrenceMap2.entrySet()) {
+            if (entry.getKey() == ' ') {
+                System.out.println("' ' -- " + entry.getValue());
+            } else {
+                System.out.println(entry.getKey() + " -- " + entry.getValue());
+            }
+        }
+    }
+}
