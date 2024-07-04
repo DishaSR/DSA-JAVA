@@ -1,0 +1,58 @@
+// A restaurant keeps a track of all the orders using an ArrayList and a class Order.The class Order is implemented and provided to you. 
+// You need to retrieve and return the list of items present in all the orders. Implement the logic inside getItems() method. 
+// Disha Raghani
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Order {
+    private int orderId;
+    private List<String> itemNames;
+    private boolean cashOnDelivery;
+
+    public Order(int orderId, List<String> itemNames, boolean cashOnDelivery) {
+        this.orderId = orderId;
+        this.itemNames = itemNames;
+        this.cashOnDelivery = cashOnDelivery;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public List<String> getItemNames() {
+        return itemNames;
+    }
+}
+
+class Tester {
+
+    public static List<String> getItems(List<Order> orders) {
+        List<String> allItems = new ArrayList<>();
+
+        for (Order order : orders) {
+            for (String item : order.getItemNames()) {
+                allItems.add(item.replaceAll("\\s+", ""));
+            }
+        }
+
+        return allItems;
+    }
+
+    public static void main(String[] args) {
+        List<Order> orders = new ArrayList<>();
+
+        List<String> items1 = new ArrayList<>();
+        items1.add("Burger");
+        items1.add("Pizza");
+        orders.add(new Order(911, items1, true));
+
+        List<String> items2 = new ArrayList<>();
+        items2.add("Cream cheese");
+        items2.add("Bread");
+        orders.add(new Order(912, items2, true));
+
+        List<String> result = getItems(orders);
+        System.out.println(result);
+    }
+}
