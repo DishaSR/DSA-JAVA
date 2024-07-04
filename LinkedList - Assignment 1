@@ -1,0 +1,54 @@
+import java.util.LinkedList;
+import java.util.List;
+import java.util.HashSet;
+
+class Tester {
+
+    public static List<Integer> removeDuplicates(List<Integer> list) {
+        HashSet<Integer> set = new HashSet<>();
+        List<Integer> result = new LinkedList<>();
+        
+        for (Integer num : list) {
+            if (!set.contains(num)) {
+                set.add(num);
+                result.add(num);
+            }
+        }
+        
+        return result;
+    }
+    
+    public static void main(String args[]) {
+        List<Integer> list1 = new LinkedList<>();
+        list1.add(10);
+        list1.add(15);
+        list1.add(21);
+        list1.add(15);
+        list1.add(10);
+        
+        List<Integer> updatedList1 = removeDuplicates(list1);
+        
+        System.out.println("Linked list without duplicates:");
+        for (Integer value : updatedList1) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
+        
+        List<Integer> list2 = new LinkedList<>();
+        list2.add(51);
+        list2.add(45);
+        list2.add(45);
+        list2.add(15);
+        list2.add(82);
+        list2.add(51);
+        list2.add(10);
+        
+        List<Integer> updatedList2 = removeDuplicates(list2);
+        
+        System.out.println("Linked list without duplicates:");
+        for (Integer value : updatedList2) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
+    }
+}
