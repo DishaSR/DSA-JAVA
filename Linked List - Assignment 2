@@ -1,0 +1,112 @@
+// Given a linked list, reverse the list using recursion.
+
+class Node {
+
+    private String data;
+    private Node next;
+
+    public Node(String data) {
+        this.data = data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+      
+    public void setNext(Node node) {
+        this.next = node;
+    }
+      
+    public String getData() {
+        return this.data;
+    }
+      
+    public Node getNext() {
+        return this.next;
+    }
+}
+
+class LinkedList {
+
+    private Node head;
+    private Node tail;
+
+    public Node getHead() {
+        return this.head;
+    }
+      
+    public Node getTail() {
+        return this.tail;
+    }
+
+    public void setHead(Node head) {
+        this.head = head;
+    }
+      
+    public void setTail(Node tail) {
+        this.tail = tail;
+    }
+
+    public void addAtEnd(String data) {
+        Node node = new Node(data);
+
+        if (this.head == null) {
+            this.head = this.tail = node;
+        } else {
+            this.tail.setNext(node);
+            this.tail = node;
+        }
+    }
+
+    public void display() {
+        Node temp = this.head;
+
+        while (temp != null) {
+            System.out.println(temp.getData());
+            temp = temp.getNext();
+        }
+    }
+}
+
+class Tester {
+
+    public static void main(String args[]) {
+        LinkedList linkedList = new LinkedList();
+        LinkedList reversedLinkedList = new LinkedList();
+            
+        linkedList.addAtEnd("Data");
+        linkedList.addAtEnd("Structures");
+        linkedList.addAtEnd("and");
+        linkedList.addAtEnd("Algorithms");
+            
+        System.out.println("Initial List");
+        linkedList.display();
+
+        System.out.println();
+            
+        reverseList(linkedList.getHead(), reversedLinkedList);
+        System.out.println("Reversed List");
+        reversedLinkedList.display();
+    }
+
+    public static void reverseList(Node head, LinkedList reversedLinkedList) {
+        if (head == null) {
+            return;
+        }
+
+        // Recursive call to reverse the rest of the list
+        reverseList(head.getNext(), reversedLinkedList);
+
+        // Insert the current node at the end of reversedLinkedList
+        Node newNode = new Node(head.getData());
+        newNode.setNext(null); // Clear the next pointer for the reversed list's tail
+
+        if (reversedLinkedList.getHead() == null) {
+            reversedLinkedList.setHead(newNode);
+            reversedLinkedList.setTail(newNode);
+        } else {
+            reversedLinkedList.getTail().setNext(newNode);
+            reversedLinkedList.setTail(newNode);
+        }
+    }
+}
