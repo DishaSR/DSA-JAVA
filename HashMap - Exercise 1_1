@@ -1,0 +1,56 @@
+import java.util.HashMap;
+import java.util.Map;
+
+class Student {
+    
+    public static Map<String, Double> findMaxMinScorers(Map<String, Double> studentMarks) {
+        Map<String, Double> result = new HashMap<>();
+        
+        // Initialize variables to track max and min scores and corresponding students
+        double maxScore = Double.MIN_VALUE;
+        double minScore = Double.MAX_VALUE;
+        String maxStudent = null;
+        String minStudent = null;
+        
+        // Iterate through the studentMarks map to find max and min scores
+        for (Map.Entry<String, Double> entry : studentMarks.entrySet()) {
+            String student = entry.getKey();
+            double score = entry.getValue();
+            
+            // Check for maximum score
+            if (score > maxScore) {
+                maxScore = score;
+                maxStudent = student;
+            }
+            
+            // Check for minimum score
+            if (score < minScore) {
+                minScore = score;
+                minStudent = student;
+            }
+        }
+        
+        // Populate the result map with max and min scores and corresponding students
+        result.put(maxStudent, maxScore);
+        result.put(minStudent, minScore);
+        
+        return result;
+    }
+}
+
+class Tester {
+
+    public static void main(String args[]) {
+        Map<String, Double> studentMarks = new HashMap<>();
+        studentMarks.put("Lily", 90.0);
+        studentMarks.put("Robin", 68.0);
+        studentMarks.put("Marshall", 76.5);
+        studentMarks.put("Neil", 67.0);
+        studentMarks.put("Ted", 92.0);
+        
+        Map<String, Double> maxMinScorers = Student.findMaxMinScorers(studentMarks);
+        
+        System.out.println("Details of Top Scorers & Low Scorers\n====================================");
+        System.out.println(maxMinScorers);
+    }
+}
