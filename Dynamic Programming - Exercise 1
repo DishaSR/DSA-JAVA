@@ -1,0 +1,31 @@
+class Tester1 {
+	
+	public static int cutRod(int[] price, int n) {
+	    if (n <= 0) {
+	        return 0;
+	    }
+	    
+	    int[] maxRevenue = new int[n + 1];
+	    maxRevenue[0] = 0;
+
+	    for (int length = 1; length <= n; length++) {
+	        int maxVal = Integer.MIN_VALUE;
+	        for (int cut = 0; cut < length; cut++) {
+	            maxVal = Math.max(maxVal, price[cut] + maxRevenue[length - cut - 1]);
+	        }
+	        maxRevenue[length] = maxVal;
+	    }
+	    
+	    return maxRevenue[n];
+	}
+
+	public static void main(String[] args) {
+		int price1[] = { 1, 5, 8, 9, 10, 17, 17, 20 };
+		int n1 = 4;
+		System.out.println("Maximum price for price1: " + cutRod(price1, n1));
+		
+		int price2[] = { 10, 24, 30, 40, 45 };
+		int n2 = 5;
+		System.out.println("Maximum price for price2: " + cutRod(price2, n2));
+	}
+}
