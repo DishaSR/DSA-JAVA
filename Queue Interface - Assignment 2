@@ -1,0 +1,49 @@
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+class Tester {
+
+    public static Deque<Character> updateStack(Deque<Character> inputStack) {
+        // Step 1: Pop the bottom three elements and store them in a temporary stack
+        Deque<Character> tempStack = new ArrayDeque<>();
+        Deque<Character> helperStack = new ArrayDeque<>();
+
+        // Move elements to helperStack to access bottom three elements
+        while (inputStack.size() > 3) {
+            helperStack.push(inputStack.pop());
+        }
+
+        // Pop bottom three elements
+        for (int i = 0; i < 3; i++) {
+            tempStack.push(inputStack.pop());
+        }
+
+        // Move elements back from helperStack to inputStack
+        while (!helperStack.isEmpty()) {
+            inputStack.push(helperStack.pop());
+        }
+
+        // Push the bottom three elements to the top of inputStack
+        while (!tempStack.isEmpty()) {
+            inputStack.push(tempStack.pop());
+        }
+
+        return inputStack;
+    }
+
+    public static void main(String[] args) {
+        Deque<Character> inputStack = new ArrayDeque<>();
+        inputStack.push('E');
+        inputStack.push('D');
+        inputStack.push('C');
+        inputStack.push('B');
+        inputStack.push('A');
+
+        Deque<Character> resultStack = updateStack(inputStack);
+
+        System.out.println("The alphabets in updated stack are:");
+        for (Character alphabet : resultStack) {
+            System.out.println(alphabet);
+        }
+    }
+}
