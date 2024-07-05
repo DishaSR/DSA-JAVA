@@ -1,0 +1,61 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+class Tester {
+    
+    static int count = 0;
+    static Map<String, Integer> memo = new HashMap<>();
+    
+    public static void findWordSegments(List<String> wordsList, String inputString) {
+        count = countWordSegments(wordsList, inputString);
+    }
+    
+    private static int countWordSegments(List<String> wordsList, String input) {
+        if (input.isEmpty()) {
+            return 1; // Base case: empty input, one way to segment
+        }
+        
+        if (memo.containsKey(input)) {
+            return memo.get(input);
+        }
+        
+        int ways = 0;
+        for (String word : wordsList) {
+            if (input.startsWith(word)) {
+                ways += countWordSegments(wordsList, input.substring(word.length()));
+            }
+        }
+        
+        memo.put(input, ways);
+        return ways;
+    }
+
+    public static void main(String[] args){
+        List<String> wordsList1 = new ArrayList<>();
+        wordsList1.add("i");
+        wordsList1.add("like");
+        wordsList1.add("pizza");
+        wordsList1.add("li");
+        wordsList1.add("ke");
+        wordsList1.add("pi");
+        wordsList1.add("zza");
+        
+        String inputString1 = "ilikepizza";
+        findWordSegments(wordsList1, inputString1);
+        System.out.println("Number of segments for inputString1: " + count); // Expected output: 4
+        
+        List<String> wordsList2 = new ArrayList<>();
+        wordsList2.add("java");
+        wordsList2.add("is");
+        wordsList2.add("fun");
+        wordsList2.add("ja");
+        wordsList2.add("fu");
+        wordsList2.add("i");
+        
+        String inputString2 = "fn";
+        findWordSegments(wordsList2, inputString2);
+        System.out.println("Number of segments for inputString2: " + count); // Expected output: 0
+    }
+}
