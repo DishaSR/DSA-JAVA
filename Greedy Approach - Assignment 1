@@ -1,0 +1,37 @@
+class Tester {
+    
+    public static int findSwapCount(String inputString)  { 
+        int openNeeded = 0; // Number of open parentheses needed to balance
+        int closeNeeded = 0; // Number of close parentheses needed to balance
+        int swapCount = 0; // Total number of swaps required
+        
+        // Traverse through the string
+        for (int i = 0; i < inputString.length(); i++) {
+            char currentChar = inputString.charAt(i);
+            
+            if (currentChar == '(') {
+                openNeeded++; // Increment openNeeded for every '('
+            } else if (currentChar == ')') {
+                if (openNeeded > 0) {
+                    openNeeded--; // Match this ')' with a previous '('
+                } else {
+                    closeNeeded++; // No matching '(' found, need to swap this ')'
+                }
+            }
+        }
+        
+        // Total swaps needed is the sum of openNeeded and closeNeeded
+        swapCount = openNeeded + closeNeeded;
+        
+        return swapCount;
+    } 
+  
+    public static void main(String args[])  { 
+        String inputString1 = "())()("; 
+        String inputString2 = "()";
+        
+        System.out.println("Number of swaps for inputString1: " + findSwapCount(inputString1)); // Output: 2
+        System.out.println("Number of swaps for inputString2: " + findSwapCount(inputString2)); // Output: 0
+    } 
+
+}
